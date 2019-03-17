@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import SignUpForm, ProfileUpdateForm, UserUpdateForm,LoginForm
 from django.views.decorators.csrf import _EnsureCsrfCookie 
-
+from django.contrib import messages
 
 
 def home(request):
@@ -60,7 +60,7 @@ def edit_profile(request):
          profile.user = user
          profile.save()
          messages.info(request, 'You\'ve successfully updated your account!')
-         return redirect('profile')
+         return redirect('home')
    else:
       form = ProfileUpdateForm(instance=request.user)
       user_form = UserUpdateForm(instance=request.user.profile)
