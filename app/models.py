@@ -39,6 +39,6 @@ class Project(models.Model):
         self.save()
 
     @classmethod
-    def search_projects(cls, search_term):
-        projects = Project.objects.filter(title__icontains = search_term)
+    def search_projects(cls, title):
+        projects = Project.objects.filter(title__icontains = title)
         return projects
