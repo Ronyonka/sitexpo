@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth.models import User
 from .models import Profile
 
@@ -34,4 +34,23 @@ class ProfileUpdateForm(forms.ModelForm):
             'bio':forms.Textarea(attrs={'placeholder':'Bio'})
         }
 
+class UserUpdateForm(forms.ModelForm):
+    '''
+    User update form.
 
+    A user can add their first and last names
+    '''
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'First Name'}))
+    last_name= forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Last Name'}))
+
+    class Meta:
+        model = User
+        fields = ['first_name','last_name']
+
+class LoginForm(AuthenticationForm):
+    '''
+    Login form.
+
+    Takes username and password.
+    '''
+    username = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Username'}))
