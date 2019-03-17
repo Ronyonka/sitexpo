@@ -42,3 +42,12 @@ class Project(models.Model):
     def search_projects(cls, title):
         projects = Project.objects.filter(title__icontains = title)
         return projects
+
+    @classmethod
+    def get_projects(cls):
+        return cls.objects.all()
+
+    @classmethod
+    def filter_by_user(cls,owner):
+        the_user = User.objects(username=owner)
+        return cls.objects.filter(owner__id = the_user.id)
