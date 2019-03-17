@@ -37,3 +37,8 @@ class Project(models.Model):
     def update_description(self,desc):
         self.description = desc
         self.save()
+
+    @classmethod
+    def search_projects(cls, search_term):
+        projects = Project.objects.filter(title__icontains = search_term)
+        return projects
