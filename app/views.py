@@ -2,7 +2,7 @@ from django.http import HttpResponse,Http404,HttpResponseRedirect
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .forms import SignUpForm, ProfileUpdateForm, UserUpdateForm,LoginForm
+from .forms import SignUpForm, ProfileUpdateForm, UserUpdateForm,LoginForm,NewProjectForm
 from django.views.decorators.csrf import _EnsureCsrfCookie 
 from django.contrib import messages
 
@@ -72,3 +72,19 @@ def edit_profile(request):
    }
 
    return render(request, 'edit-profile.html', context)
+
+
+@login_required
+def new_image(request):
+    current_user= request.user
+    if request.method == 'POST':
+        form = NewProjectForm(request.POST,request.FILES)
+        if form.is_valid():
+            project = form.save(commit=False)
+            project.owner = current_user
+            project.save()
+            return redirect('home')
+    else:
+        form = NewProjectForm()
+
+    return render(request, 'new_project.html', {"form":form})
