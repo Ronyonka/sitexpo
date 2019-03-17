@@ -11,6 +11,7 @@ urlpatterns=[
     url(r'^login/$', auth_views.login, {'template_name':'login.html'},name='login'),
     url(r'^signup/$', views.signup, name='signup'),
     url(r'^logout/$', auth_views.logout, {'next_page': 'login'}, name='logout'),
+    url(r'profile/edit', views.edit_profile, name='edit_profile'),
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
