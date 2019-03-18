@@ -115,8 +115,8 @@ def new_project(request):
     return render(request, 'new_project.html', {"form":form})
 
 @login_required
-def single_image(request, project_id):
-    project = Project.get_image_id(project_id)
+def project(request, project_id):
+    project = Project.get_project_id(project_id)
     reviews = Reviews.get_reviews_by_projects(project_id)
     
     if request.method == 'POST':
@@ -128,8 +128,8 @@ def single_image(request, project_id):
             reviews.save()
             return redirect('project', project_id=project_id)
     else:
-        form = CommentForm()
+        form = ReviewForm()
 
-    return render(request, 'project.html', {'image':image, 'form':form, 'reviews':reviews})
+    return render(request, 'project.html', {'project':project, 'form':form, 'reviews':reviews})
 
 
