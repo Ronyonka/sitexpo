@@ -2,6 +2,7 @@ from django.http import HttpResponse,Http404,HttpResponseRedirect
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from .models import Profile,Project
 from .forms import SignUpForm, ProfileUpdateForm, UserUpdateForm,LoginForm,NewProjectForm
 from django.views.decorators.csrf import _EnsureCsrfCookie 
@@ -67,6 +68,7 @@ def own_profile(request):
    '''
    user = request.user    
    projects = Project.objects.all().filter(owner_id = user.id)
+   profile = Profile.objects.all()
    return render(request, 'profile.html', {'projects':projects, "user":user, "current_user":request.user })
 
 @login_required

@@ -55,3 +55,35 @@ class Project(models.Model):
     def filter_by_user(cls,owner):
         the_user = User.objects(username=owner)
         return cls.objects.filter(owner__id = the_user.id)
+
+class Reviews(models.Model):
+    text = models.TextField(max_length = 300, blank = True)
+    project = models.ForeignKey(Project, related_name = "comments")
+    author = models.ForeignKey(User, related_name = "author")
+    created_date = models.DateTimeField(auto_now_add = True,null = True)
+
+
+    def __str__(self):
+        return self.review
+
+ 
+    def save_review(self):
+       self.save()
+
+       
+
+    def delete_review(self):
+        Review.objects.get(id = self.id).delete()
+    
+    @classmethod
+    def get_reviews_by_projects(cls, id):
+        reviews = Reviews.objects.filter(project__pk = id)
+        return reviews
+        
+    def __str__(self):
+        return self.text
+
+    @classmethod
+    def get_reviews_by_projects(cls, id):
+        reviews = Reviews.objects.filter(project__pk = id)
+        return reviews

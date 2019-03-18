@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+
 {% block content %}
 <div class="container">
   {% if projects%}
@@ -10,9 +11,10 @@
         <img class="card-img-top" src="{{project.image.url}}" alt="Card image cap">
         <div class="card-body">
           <h3 class="card-title"><strong>{{project.title}}</strong></h3>
-          <!-- <p class="card-text">{{project.description}}</p> -->
+          <p class="card-text"><a href="{% url 'profile' project.owner.id %}" style="font-size: 12px; color: grey; text-decoration: none;">{{ project.owner }}</a></p>
           <a href="{{project.url}}" class="btn btn-primary" target="_blank">Visit site</a>
         </div>
+
       </div>
 </div>
 {% endfor %}
