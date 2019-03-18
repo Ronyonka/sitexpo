@@ -69,7 +69,7 @@ def own_profile(request):
    user = request.user    
    projects = Project.objects.all().filter(owner_id = user.id)
    profile = Profile.objects.all()
-   return render(request, 'profile.html', {'projects':projects, "user":user, "current_user":request.user })
+   return render(request, 'profile.html', {'projects':projects,'profile':profile, "user":user, "current_user":request.user })
 
 @login_required
 def edit_profile(request):
