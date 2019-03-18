@@ -12,7 +12,7 @@ def home(request):
    projects = Project.get_projects()
    user = request.user
    profile = Profile.get_profiles()
-   return render(request, 'home.html')
+   return render(request, 'home.html'{"projects":projects, "user":request.user, "profile":profile})
 
 def signup(request):
     if request.method =='POST':
