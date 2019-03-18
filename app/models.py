@@ -48,6 +48,11 @@ class Project(models.Model):
         return projects
 
     @classmethod
+    def get_project_id(cls, id):
+        project = Project.objects.get(pk=id)
+        return project
+
+    @classmethod
     def get_projects(cls):
         return cls.objects.all()
 
