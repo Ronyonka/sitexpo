@@ -3,14 +3,14 @@
 {% block content %}
 <div class="container">
   {% if projects%}
-<div class="row">
+<div class="row" style="padding-top:20px;">
   {% for project in projects %}
 <div class="col-md-4">
     <div class="card" >
         <img class="card-img-top" src="{{project.image.url}}" alt="Card image cap">
         <div class="card-body">
-          <h5 class="card-title">{{project.title}}</h5>
-          <p class="card-text">{{project.description}}</p>
+          <h3 class="card-title"><strong>{{project.title}}</strong></h3>
+          <!-- <p class="card-text">{{project.description}}</p> -->
           <a href="{{project.url}}" class="btn btn-primary" target="_blank">Visit site</a>
         </div>
       </div>
