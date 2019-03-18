@@ -61,6 +61,12 @@ class LoginForm(AuthenticationForm):
         fields = ['username','password']
 
 class NewProjectForm(forms.ModelForm):
+    '''
+    New Project Form 
+    
+    Allows the user to post project images, description and url.
+    '''
+
     class Meta:
         model = Project
         fields = ['image','title','description','url']

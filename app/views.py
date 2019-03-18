@@ -2,13 +2,17 @@ from django.http import HttpResponse,Http404,HttpResponseRedirect
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from .models import Profile,Project
 from .forms import SignUpForm, ProfileUpdateForm, UserUpdateForm,LoginForm,NewProjectForm
 from django.views.decorators.csrf import _EnsureCsrfCookie 
 from django.contrib import messages
 
 
 def home(request):
-    return render(request, 'home.html')
+   projects = Project.get_projects()
+   user = request.user
+   profile = Profile.get_profiles()
+   return render(request, 'home.html')
 
 def signup(request):
     if request.method =='POST':
