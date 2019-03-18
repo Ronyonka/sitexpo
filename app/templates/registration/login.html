@@ -2,10 +2,14 @@
 
 {% block content %}
 <div class="container">
-  <div class="row">
+  <div class="row" style="padding-top:100px;">
     <div class="col-md-4"></div>
     <div class="col-md-4">
-        <h2>Log in to My Site</h2>
+        <div class="card text-center">
+            <div class="card-header">
+        <h2>Log in to Sitexpo</h2>
+        </div>
+        <div class="card-body">
         {% if form.errors %}
           <p style="color: red">Your username and password didn't match. Please try again.</p>
         {% endif %}
@@ -24,9 +28,13 @@
               {% endif %}
             </p>
           {% endfor %}
+        </div>
+        <div class="card-footer">
           <button type="submit">Log in</button>
-          <a href="{% url 'signup' %}">New to My Site? Sign up</a>
+          <a href="{% url 'signup' %}">New to Sitexpo? Sign up</a>
+        </div>
         </form>
+        </div>
     </div>
     <div class="col-md-4"></div>
   </div>
