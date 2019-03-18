@@ -1,24 +1,22 @@
-# Instagram Clone
-This is a clone of the web version of the popular social media app Instagram.
-
-#### Date of Current Version (March 13th,2019)
+# Sitexpo
+#### Date of Current Version (March 18th,2019)
 #### By **Ron Onyonka**
-
 ## Description
-This is my attempt to clone instagram and its features.
+This is an app that allows users to post projects they have worked on and have other users rate and review them.
+
 
 
 ## Behaviour Driven Development
 | Behaviour     | Input     | Output  |
 | ------------- |:-------------:| -----:|
-| User Signs Up| Enter Their Credentials| Redirected to the profile creation page|
-| User log in | Username and password | Redirected to the homepage with other users images |
-| Search for User| They enter a username in the search bar | They are directed to a page with profiles of the specific users displayed |
-| Uploading images | They select add image| they select an image from their device that they would love to add |
+| Home Page| - | - |
+| User log in | Username and password | Redirected to the homepage with other users projects |
+| Search for project | Project title in the search bar | They are directed to a page with projects by different users with the title displayed |
+| Adding Projects | They select add project | they select an image from their device that they would love to add |
 | Liking a picture | They select a heart icon at the bottom of the image| one like is added to the image |
 
 ## Link to Live Website 
-Here is a link to the live website: <https://ronstagram.herokuapp.com/>
+Here is a link to the live website: <https://sitexpo.herokuapp.com/>
 
 ### Technologies Used
 
@@ -42,8 +40,8 @@ You need the following to work on the project: -
 
 ### Clone the repo and check into the project folder
 
-- `git clone https://github.com/Ronyonka/instagram`
-- `cd instagram-clone`
+- `git clone https://github.com/Ronyonka/sitexpo`
+- `cd sitexpo`
 
 ### Create and activate the virtual environment
 
@@ -57,12 +55,20 @@ You need the following to work on the project: -
 (virtual)$ pip install -r requirements.txt
 ```
 
+### Create a database
+
+```bash
+(virtual)$ psql
+    user=# CREATE DATABASE sitexpo;
+```
+
+
 ### Create a .env file and in it input the following:
 
 ```bash
 SECRET_KEY=''
 DEBUG=True #Set To False in Production
-DB_NAME='instagram'
+DB_NAME='sitexpo'
 DB_USER='user'
 DB_PASSWORD='password'
 DB_HOST='127.0.0.1'
@@ -70,17 +76,12 @@ MODE='dev' #set to prod in production
 ALLOWED_HOSTS=['*']
 DISABLE_COLLECTSTATIC=1
 ```
-### Create a database
 
-```bash
-(virtual)$ psql
-    user=# CREATE DATABASE instagram;
-```
 
 ### Make migrations
 
 
-- `(virtual)$ python3.6 manage.py makemigrations photos`
+- `(virtual)$ python3.6 manage.py makemigrations app`
 - `(virtual)$ pytohon3.6 manage.py migrate`
 
 
