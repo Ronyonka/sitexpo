@@ -10,6 +10,8 @@ from .forms import LoginForm
 urlpatterns=[
     url(r'^$', views.home, name='home'),
     url(r'^new-project/$', views.new_project, name='new-project'),
+    url(r'^profile/(\d+)',views.profile, name='profile'),
+    url(r'^profile',views.own_profile, name='myprofile'),
     url(r'login/', auth_views.LoginView.as_view(authentication_form=LoginForm), name='login'),
     url(r'^signup/$', views.signup, name='signup'),
     url(r'^logout/$', auth_views.logout, {'next_page': 'login'}, name='logout'),

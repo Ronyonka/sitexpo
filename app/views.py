@@ -50,6 +50,25 @@ def login_view(request):
 
    return render(request, 'registration/login.html', context)
 
+def profile(request,id):
+   '''
+   View that allows user to view other users profiles
+
+   '''
+   user = User.objects.get(id=id)
+   projects = Project.objects.all().filter(owner_id = user.id)
+   profile = Profile.objects.all()
+   return render(request, 'profile.html',{"projects":projects,"profile":profile,"current_user":request.user,"user":user,})
+
+@login_required
+def own_profile(request):
+   '''
+   Directs User to their own Profile.
+   '''
+   user = request.user    
+   projects = Project.objects.all().filter(owner_id = user.id)
+   return render(request, 'profile.html', {'projects':projects, "user":user, "current_user":request.user })
+
 @login_required
 def edit_profile(request):
 
@@ -93,9 +112,4 @@ def new_project(request):
 
     return render(request, 'new_project.html', {"form":form})
 
-@login_required
-def profile(request,id):
-    user = User.objects.get(id=id)
-    projects = Project.objects.all().filter(owner_id = user.id)
-    profile = Profile.objects.all()
-    return render(request, 'profile.html',{"projects":projects,"profile":profile,"current_user":request.user,"user":user,})
+
