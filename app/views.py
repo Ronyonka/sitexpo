@@ -133,3 +133,15 @@ def project(request, project_id):
     return render(request, 'project.html', {'project':project, 'form':form, 'reviews':reviews})
 
 
+def search(request):
+    if 'search' in request.GET and request.GET['search']:
+        search_term = request.GET.get('search')
+        projects = Project.search_profile(search_term)
+        message = f'{search_term}'
+
+        return render(request, 'search.html',{'message':message, 'projects':projects})
+    else:
+        message = 'Enter term to search'
+        return render(request, 'search.html', {'message':message})
+
+

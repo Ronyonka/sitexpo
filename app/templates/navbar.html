@@ -71,7 +71,7 @@
         <a class='btn btn-default' href="{% url 'login' %}">Login</a>
         {% endif %}
 
-        <form class="form-inline my-2 my-lg-0" action="" style="float:right">
+        <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}" style="float:right">
             <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search Projects" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
