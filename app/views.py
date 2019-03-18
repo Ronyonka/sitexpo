@@ -92,3 +92,10 @@ def new_project(request):
         form = NewProjectForm()
 
     return render(request, 'new_project.html', {"form":form})
+
+@login_required
+def profile(request,id):
+    user = User.objects.get(id=id)
+    projects = Project.objects.all().filter(owner_id = user.id)
+    profile = Profile.objects.all()
+    return render(request, 'profile.html',{"projects":projects,"profile":profile,"current_user":request.user,"user":user,})
