@@ -75,13 +75,13 @@ def edit_profile(request):
 
 
 @login_required
-def new_image(request):
-    current_user= request.user
+def new_project(request):
+    user= request.user
     if request.method == 'POST':
         form = NewProjectForm(request.POST,request.FILES)
         if form.is_valid():
             project = form.save(commit=False)
-            project.owner = current_user
+            project.owner = user.profile
             project.save()
             return redirect('home')
     else:
