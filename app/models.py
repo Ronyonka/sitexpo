@@ -64,13 +64,10 @@ class Reviews(models.Model):
 
 
     def __str__(self):
-        return self.review
-
+        return self.text
  
     def save_review(self):
-       self.save()
-
-       
+       self.save()  
 
     def delete_review(self):
         Review.objects.get(id = self.id).delete()
@@ -80,9 +77,6 @@ class Reviews(models.Model):
         reviews = Reviews.objects.filter(project__pk = id)
         return reviews
         
-    def __str__(self):
-        return self.text
-
     @classmethod
     def get_reviews_by_projects(cls, id):
         reviews = Reviews.objects.filter(project__pk = id)
