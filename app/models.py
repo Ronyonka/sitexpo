@@ -74,48 +74,6 @@ class Project(models.Model):
         content_ratings = list(map(lambda x: x.content, self.ratings.all()))
         return np.mean(content_ratings)
 
-
-# class Reviews(models.Model):
-#     text = models.TextField(max_length = 300, blank = True)
-#     project = models.ForeignKey(Project, related_name = "comments")
-#     author = models.ForeignKey(User, related_name = "author")
-#     created_date = models.DateTimeField(auto_now_add = True,null = True)
-
-
-#     def __str__(self):
-#         return self.text
- 
-#     def save_review(self):
-#        self.save()  
-
-#     def delete_review(self):
-#         Review.objects.get(id = self.id).delete()
-    
-#     @classmethod
-#     def get_reviews_by_projects(cls, id):
-#         reviews = Reviews.objects.filter(project__pk = id)
-#         return reviews
-        
-#     @classmethod
-#     def get_reviews_by_projects(cls, id):
-#         reviews = Reviews.objects.filter(project__pk = id)
-#         return reviews
-    
-    # def get_comment(self, id):
-    #     comments = Review.objects.filter(project_id =id)
-    #     return comments
-
-# class Rating(models.Model):
-#     project = models.ForeignKey(Project, related_name="ratings")
-#     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ratings')
-#     design = models.IntegerField(default=0)
-#     usability= models.IntegerField(default=0)
-#     content= models.IntegerField(default=0)
-
-#     @classmethod
-#     def get_rating_by_projects(cls, id):
-#         rating = Rating.objects.filter(project__pk = id)
-#         return rating
     
 class Ratings(models.Model):
     RATING = (
@@ -143,3 +101,7 @@ class Ratings(models.Model):
     def get_rating_by_projects(cls, id):
         ratings = Ratings.objects.filter(project__pk = id)
         return ratings
+
+    @classmethod
+    def get_reviews(cls,review):
+        review = Ratings.objects.get(review=review)

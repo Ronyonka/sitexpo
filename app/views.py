@@ -118,37 +118,21 @@ def new_project(request):
 @login_required
 def project(request, project_id):
    project = Project.get_project_id(project_id)
-   reviews = Reviews.get_reviews_by_projects(project_id)
-   rating = Rating.get_rating_by_projects(project_id)
-   if rating:
-      average = ((rating.aggregate(Sum('design'))['design__sum'])/rating.count() + 
-      rating.aggregate(Sum('usability'))['usability__sum']/rating.count() + 
-      rating.aggregate(Sum('content'))['content__sum']/rating.count()) / 3
-   else:
-      average = '0.0'
-
-   name = f'{project.title} by {project.owner.user.first_name}'
+   ratings = Ratings.get_rating_by_projects(project_id)
+   
    if request.method == 'POST':
-      form = ReviewForm(request.POST)
-      rating_form = RatingForm(request.POST)
-      if form.is_valid() and rating_form.is_valid():
-         rating = rating_form.save(commit=False)
-         rating.project = project
-         rating.user = request.user
-         design = rating_form.cleaned_data['design']
-         content = rating_form.cleaned_data['content']
-         usability= rating_form.cleaned_data['usability']
-         rating.save()
-         reviews = form.save(commit=False)
-         reviews.project = project
-         reviews.author = request.user
-         reviews.save()
+      form = RatingForm(request.POST)
+      if form.is_valid():
+         ratings = form.save(commit=False)
+         ratings.project = project
+         ratings.user = request.user
+         ratings.save()
          return redirect('project', project_id=project_id)
    else:
-      form = ReviewForm()
-      rating_form = RatingForm
+      form = RatingForm()
+     
 
-   return render(request, 'project.html', {'project':project, 'form':form ,'average':average, 'rating_form':rating_form,'rating':rating,'reviews':reviews})
+   return render(request, 'project.html', {'project':project, 'form':form ,'ratings':ratings})
 
 
 def search(request):

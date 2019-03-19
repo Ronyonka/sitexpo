@@ -15,23 +15,24 @@
         <div class="col-md-4">
         
           
-            <h1>{{ average|floatformat }}</h1>
-         
+            <h5 style="color: black; font-family: 'ABeeZee', sans-serif;"> {{ project.average_design | floatformat }} average rating of design</h5>
+            <h5 style="color: black; font-family: 'ABeeZee', sans-serif;"> {{ project.average_content | floatformat }} average rating of content</h5>
+            <h5 style=" color: black;font-family: 'ABeeZee', sans-serif;"> {{ project.average_usability | floatformat }} average rating of usability</h5>
 
 
             <hr>
 
-            <p class="home-list"> {{reviews|length}} reviews </p>
+            <p class="home-list"> {{ratings|length}} reviews </p>
             <div class="reviews">
-            {% for review in reviews %}
+            {% for review in ratings %}
                 <div class="row">
                     <div class="col-md-10">
                         <ul class="list-inline home-list">
                             <li class="list-inline-item">
-                                <a href="{% url 'profile' project.owner.id%}">{{review.author.username}}</a>
+                                <a href="{% url 'profile' project.owner.id%}">{{review.user.username}}</a>
                             </li>
                             <li class="list-inline-item">
-                                <p>{{review.text}} </p>
+                                <p>{{review.review}} </p>
                             </li>
                         </ul>
                     </div>
@@ -44,11 +45,7 @@
                 </div>
                 {% endfor %}
             </div>
-            <form action="{% url 'project' project_id=project.id %}">
-            {%csrf_token%}
-             {% bootstrap_form rating_form %}
-             <input type="submit" class="btn btn-success" value="Update">
-            </form>
+
             <form action="{% url 'project' project_id=project.id %}" method="POST">
                 {% csrf_token %}
                 {% bootstrap_form form %}
