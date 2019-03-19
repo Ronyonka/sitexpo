@@ -18,7 +18,7 @@ urlpatterns=[
     url(r'^logout/$', auth_views.logout, {'next_page': 'login'}, name='logout'),
     url(r'profile/edit', views.edit_profile, name='edit_profile'),
     url(r'^search/', views.search, name='search'),
-    url(r'^rate/',views.rate,name='rate'),
+
 
 ]
 if settings.DEBUG:

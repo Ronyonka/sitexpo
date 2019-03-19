@@ -75,38 +75,50 @@ class Project(models.Model):
         return np.mean(content_ratings)
 
 
-class Reviews(models.Model):
-    text = models.TextField(max_length = 300, blank = True)
-    project = models.ForeignKey(Project, related_name = "comments")
-    author = models.ForeignKey(User, related_name = "author")
-    created_date = models.DateTimeField(auto_now_add = True,null = True)
+# class Reviews(models.Model):
+#     text = models.TextField(max_length = 300, blank = True)
+#     project = models.ForeignKey(Project, related_name = "comments")
+#     author = models.ForeignKey(User, related_name = "author")
+#     created_date = models.DateTimeField(auto_now_add = True,null = True)
 
 
-    def __str__(self):
-        return self.text
+#     def __str__(self):
+#         return self.text
  
-    def save_review(self):
-       self.save()  
+#     def save_review(self):
+#        self.save()  
 
-    def delete_review(self):
-        Review.objects.get(id = self.id).delete()
+#     def delete_review(self):
+#         Review.objects.get(id = self.id).delete()
     
-    @classmethod
-    def get_reviews_by_projects(cls, id):
-        reviews = Reviews.objects.filter(project__pk = id)
-        return reviews
+#     @classmethod
+#     def get_reviews_by_projects(cls, id):
+#         reviews = Reviews.objects.filter(project__pk = id)
+#         return reviews
         
-    @classmethod
-    def get_reviews_by_projects(cls, id):
-        reviews = Reviews.objects.filter(project__pk = id)
-        return reviews
+#     @classmethod
+#     def get_reviews_by_projects(cls, id):
+#         reviews = Reviews.objects.filter(project__pk = id)
+#         return reviews
     
     # def get_comment(self, id):
     #     comments = Review.objects.filter(project_id =id)
     #     return comments
 
-class Rating(models.Model):
-    RATING_CHOICES = (
+# class Rating(models.Model):
+#     project = models.ForeignKey(Project, related_name="ratings")
+#     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ratings')
+#     design = models.IntegerField(default=0)
+#     usability= models.IntegerField(default=0)
+#     content= models.IntegerField(default=0)
+
+#     @classmethod
+#     def get_rating_by_projects(cls, id):
+#         rating = Rating.objects.filter(project__pk = id)
+#         return rating
+    
+class Ratings(models.Model):
+    RATING = (
         (1, '1'),
         (2, '2'),
         (3, '3'),
@@ -119,8 +131,15 @@ class Rating(models.Model):
         (10, '10'),
 
     )
-    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="ratings")
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ratings')
-    design = models.IntegerField(choices=RATING_CHOICES, default=0)
-    usability= models.IntegerField(choices=RATING_CHOICES, default=0)
-    content= models.IntegerField(choices=RATING_CHOICES, default=0)
+    project = models.ForeignKey(Project, null=True, blank=True, on_delete=models.CASCADE, related_name="ratings")
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE, related_name='ratings')
+    review = models.TextField()
+    design = models.IntegerField(choices=RATING, default=0)
+    usability= models.IntegerField(choices=RATING, default=0)
+    content = models.IntegerField(choices=RATING, default=0)
+
+
+    @classmethod
+    def get_rating_by_projects(cls, id):
+        ratings = Ratings.objects.filter(project__pk = id)
+        return ratings

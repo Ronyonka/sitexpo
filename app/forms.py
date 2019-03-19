@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth.models import User
-from .models import Profile,Project,Reviews, Rating
+from .models import Profile,Project,Ratings
 
 
 class SignUpForm(UserCreationForm):
@@ -71,18 +71,20 @@ class NewProjectForm(forms.ModelForm):
         model = Project
         fields = ['image','title','description','url']
 
-class ReviewForm(forms.ModelForm):
-    '''
-    Allows registered users to post comments on projects
-    '''
-    class Meta:
-        model = Reviews
-        fields = ['text']
+# class ReviewForm(forms.ModelForm):
+#     '''
+#     Allows registered users to post comments on projects
+#     '''
+#     class Meta:
+#         model = Reviews
+#         fields = ['text']
 
 class RatingForm(forms.ModelForm):
     '''
-    Form that allows users to rate projects posted by other users
+    Form that allows users to rate and review projects posted by other users
+
     '''
+ 
     class Meta:
-        model = Rating
-        fields = ['usability','design','content']
+        model = Ratings
+        fields = ['usability','design','content', 'review']
