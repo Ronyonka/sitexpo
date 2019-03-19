@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+import numpy as np
 
 class Profile(models.Model):
     avatar = models.ImageField(null=True, upload_to='avatar/')
@@ -60,6 +61,19 @@ class Project(models.Model):
     def filter_by_user(cls,owner):
         the_user = User.objects(username=owner)
         return cls.objects.filter(owner__id = the_user.id)
+
+    def average_design(self):
+        design_ratings = list(map(lambda x: x.design, self.ratings.all()))
+        return np.mean(design_ratings)
+
+    def average_usability(self):
+        usability_ratings = list(map(lambda x: x.usability, self.ratings.all()))
+        return np.mean(usability_ratings)
+
+    def average_content(self):
+        content_ratings = list(map(lambda x: x.content, self.ratings.all()))
+        return np.mean(content_ratings)
+
 
 class Reviews(models.Model):
     text = models.TextField(max_length = 300, blank = True)

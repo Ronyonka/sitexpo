@@ -122,7 +122,7 @@ def project(request, project_id):
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         rating_form = RatingForm(request.POST)
-        if form.is_valid():
+        if form.is_valid() and rating_form.is_valid():
             rating = rating_form.save(commit=False)
             rating.project = project
             rating.user = request.user

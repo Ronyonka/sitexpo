@@ -10,8 +10,14 @@
             <img src="{{project.image.url}}"  alt="{{project.title}}" height="350px" width="auto">
             <hr>
             <p>{{ project.description }}</p>
+            
+
             <p class="home-list"> {{reviews|length}} reviews </p>
             <hr>
+            {% for rating in rating %}
+            
+            {% endfor %}
+
             <p class="home-list">reviews</p>
             <div class="reviews">
             {% for review in reviews %}
@@ -35,11 +41,17 @@
                 </div>
                 {% endfor %}
             </div>
+            <form action="{% url 'project' project_id=project.id %}">
+            {%csrf_token%}
+             {% bootstrap_form rating_form %}
+             <input type="submit" class="btn btn-success" value="Update">
+            </form>
             <form action="{% url 'project' project_id=project.id %}" method="POST">
                 {% csrf_token %}
                 {% bootstrap_form form %}
                 <input type="submit" class="btn btn-success" value="Update">
             </form>
+
 
         </div>
         <div class="col-md-4"></div>
