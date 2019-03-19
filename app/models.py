@@ -106,6 +106,6 @@ class Rating(models.Model):
 
     )
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ratings')
-    design_rating = models.IntegerField(choices=RATING_CHOICES, default=0)
-    usability_rating = models.IntegerField(choices=RATING_CHOICES, default=0)
-    content_rating = models.IntegerField(choices=RATING_CHOICES, default=0)
+    design = models.IntegerField(choices=RATING_CHOICES, default=0)
+    usability= models.IntegerField(choices=RATING_CHOICES, default=0)
+    content= models.IntegerField(choices=RATING_CHOICES, default=0)
