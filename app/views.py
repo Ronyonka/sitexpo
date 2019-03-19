@@ -1,6 +1,8 @@
 from django.http import HttpResponse,Http404,HttpResponseRedirect
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db.models import Sum
@@ -8,6 +10,9 @@ from .models import Profile,Project,Ratings
 from .forms import SignUpForm, ProfileUpdateForm, UserUpdateForm,LoginForm,NewProjectForm,RatingForm
 from django.views.decorators.csrf import _EnsureCsrfCookie 
 from django.contrib import messages
+from .serializer import ProfileSerializer,ProjectSerializer,UserSerializer
+from django.http import JsonResponse
+
 
 
 def home(request):
@@ -145,5 +150,17 @@ def search(request):
     else:
         message = 'Enter term to search'
         return render(request, 'search.html', {'message':message})
+
+class ProfileList(APIView):
+   def get(self,request,format=None):
+      users = User.objects.all()
+      serializers = UserSerializer(users,many=True)
+      return Response(serializers.data)
+
+class ProjectList(APIView):
+   def get(self,request,format=None):
+      projects = Project.objects.all()
+      serializers = ProjectSerializer(projects,many=True)
+      return Response(serializers.data)
 
 
