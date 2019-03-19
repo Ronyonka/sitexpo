@@ -86,3 +86,26 @@ class Reviews(models.Model):
     def get_reviews_by_projects(cls, id):
         reviews = Reviews.objects.filter(project__pk = id)
         return reviews
+    
+    # def get_comment(self, id):
+    #     comments = Review.objects.filter(project_id =id)
+    #     return comments
+
+class Rating(models.Model):
+    RATING_CHOICES = (
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+        (6, '6'),
+        (7, '7'),
+        (8, '8'),
+        (9, '9'),
+        (10, '10'),
+
+    )
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ratings')
+    design_rating = models.IntegerField(choices=RATING_CHOICES, default=0)
+    usability_rating = models.IntegerField(choices=RATING_CHOICES, default=0)
+    content_rating = models.IntegerField(choices=RATING_CHOICES, default=0)
