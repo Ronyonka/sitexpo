@@ -105,6 +105,7 @@ class Rating(models.Model):
         (10, '10'),
 
     )
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="ratings")
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ratings')
     design = models.IntegerField(choices=RATING_CHOICES, default=0)
     usability= models.IntegerField(choices=RATING_CHOICES, default=0)

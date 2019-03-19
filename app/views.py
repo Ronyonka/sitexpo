@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import Profile,Project,Reviews
-from .forms import SignUpForm, ProfileUpdateForm, UserUpdateForm,LoginForm,NewProjectForm,ReviewForm
+from .forms import SignUpForm, ProfileUpdateForm, UserUpdateForm,LoginForm,NewProjectForm,ReviewForm,RatingForm
 from django.views.decorators.csrf import _EnsureCsrfCookie 
 from django.contrib import messages
 
@@ -121,7 +121,15 @@ def project(request, project_id):
     
     if request.method == 'POST':
         form = ReviewForm(request.POST)
+        rating_form = RatingForm(request.POST)
         if form.is_valid():
+            rating = rating_form.save(commit=False)
+            rating.project = project
+            rating.user = request.user
+            design = rating_form.cleaned_data['design']
+            content = rating_form.cleaned_data['content']
+            usability= rating_form.cleaned_data['usability']
+            rating.save()
             reviews = form.save(commit=False)
             reviews.project = project
             reviews.author = request.user
@@ -129,8 +137,9 @@ def project(request, project_id):
             return redirect('project', project_id=project_id)
     else:
         form = ReviewForm()
+        rating_form = RatingForm
 
-    return render(request, 'project.html', {'project':project, 'form':form, 'reviews':reviews})
+    return render(request, 'project.html', {'project':project, 'form':form, 'rating_form':rating_form,'rating':rating,'reviews':reviews})
 
 
 def search(request):
