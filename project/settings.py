@@ -74,6 +74,7 @@ INSTALLED_APPS = [
     'bootstrap3',
     'django_forms_bootstrap',
     'tinymce',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
