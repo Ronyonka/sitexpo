@@ -1,5 +1,5 @@
 # Sitexpo
-#### Date of Current Version (March 18th,2019)
+#### Date of Current Version (March 20th,2019)
 #### By **Ron Onyonka**
 ## Description
 This is an app that allows users to post projects they have worked on and have other users rate and review them.
@@ -21,7 +21,7 @@ Here is a link to the live website: <https://sitexpo.herokuapp.com/>
 
 ## API Endpoints
 - For Projects <https://sitexpo.herokuapp.com/api/projects/>
-- For Projects <https://sitexpo.herokuapp.com/api/profiles/>
+- For Profiles <https://sitexpo.herokuapp.com/api/profiles/>
 
 ### Technologies Used
 
