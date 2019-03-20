@@ -4,27 +4,14 @@ from django.contrib.auth.models import User
 
 
 
-class ProfileSerializer(serializers.ModelSerializer):
-    class Meta:
-        model= Project
-        fields = ['bio']
-class UserSerializer(serializers.ModelSerializer):
-     profile = ProfileSerializer('profile')
-     class Meta:
-        model = User
-        fields = ['first_name','last_name', 'username', 'email', 'profile']
 
-class PrflSerializer(serializers.ModelSerializer):
-   user = UserSerializer('user')
+class ProfileSerializer(serializers.ModelSerializer):
    class Meta:
       model = Profile
-      fields = ['bio','user']
+      fields = ('user','avatar','bio')
 
 class  ProjectSerializer(serializers.ModelSerializer):
-   owner = PrflSerializer('profile')
-
    class Meta:
       model = Project
-      fields = ['title','description','url','owner']
-
+      fields = ('title','image','owner','url')
 

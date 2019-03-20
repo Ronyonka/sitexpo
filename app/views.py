@@ -10,8 +10,10 @@ from .models import Profile,Project,Ratings
 from .forms import SignUpForm, ProfileUpdateForm, UserUpdateForm,LoginForm,NewProjectForm,RatingForm
 from django.views.decorators.csrf import _EnsureCsrfCookie 
 from django.contrib import messages
-from .serializer import ProfileSerializer,ProjectSerializer,UserSerializer
+from .serializer import ProfileSerializer,ProjectSerializer
 from django.http import JsonResponse
+from rest_framework import status
+from .permissions import IsAdminOrReadOnly
 
 
 
@@ -153,14 +155,13 @@ def search(request):
 
 class ProfileList(APIView):
    def get(self,request,format=None):
-      users = User.objects.all()
-      serializers = UserSerializer(users,many=True)
+      all_profiles = Profile.objects.all()
+      serializers = ProfileSerializer(all_profiles, many=True)
       return Response(serializers.data)
-
 class ProjectList(APIView):
    def get(self,request,format=None):
-      projects = Project.objects.all()
-      serializers = ProjectSerializer(projects,many=True)
+      all_projects = Project.objects.all()
+      serializers = ProjectSerializer(all_projects, many=True)
       return Response(serializers.data)
 
 
