@@ -12,9 +12,13 @@ class Profile(models.Model):
     def __str__(self):
         return f'{self.user.username}'
 
+
     @classmethod
     def get_profiles(cls):
         return cls.objects.all()
+
+    def save_profile(self):
+        self.save()
 
 
 @receiver(post_save, sender=User)
