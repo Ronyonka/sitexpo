@@ -13,10 +13,15 @@ This is an app that allows users to post projects they have worked on and have o
 | User log in | Username and password | Redirected to the homepage with other users projects |
 | Search for project | Project title in the search bar | They are directed to a page with projects by different users with the title displayed |
 | Adding Projects | They select add project | they select an image from their device that they would love to add |
-| Liking a picture | They select a heart icon at the bottom of the image| one like is added to the image |
+| Viewing Single Projects | Click View Details| Redirected to a page with the details of the projects and the ratings and reviews |
+| Rating and reviewing a project | Select a rating (between 1-10) for design, usability and content and write in a review| The ratings are averaged and the review is displayed |
 
 ## Link to Live Website 
 Here is a link to the live website: <https://sitexpo.herokuapp.com/>
+
+## API Endpoints
+- For Projects <https://sitexpo.herokuapp.com/api/projects/>
+- For Projects <https://sitexpo.herokuapp.com/api/profiles/>
 
 ### Technologies Used
 
