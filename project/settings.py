@@ -75,6 +75,7 @@ INSTALLED_APPS = [
     'django_forms_bootstrap',
     'tinymce',
     'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [

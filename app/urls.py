@@ -1,4 +1,3 @@
-
 from django.conf.urls import url
 from . import views
 from django.conf import settings
@@ -18,8 +17,9 @@ urlpatterns=[
     url(r'^logout/$', auth_views.logout, {'next_page': 'login'}, name='logout'),
     url(r'profile/edit', views.edit_profile, name='edit_profile'),
     url(r'^search/', views.search, name='search'),
-
-
+    url(r'^api/profiles/$',views.ProfileList.as_view()),
+    url(r'^api/projects/$',views.ProjectList.as_view())
 ]
+
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
