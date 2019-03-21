@@ -17,12 +17,6 @@ class Profile(models.Model):
     def get_profiles(cls):
         return cls.objects.all()
 
-    def save_profile(self):
-        self.save()
-
-    def delete_profile(self):
-        self.delete()
-
 
 @receiver(post_save, sender=User)
 def update_user_profile(sender, instance, created, **kwargs):
