@@ -93,7 +93,7 @@ def edit_profile(request):
          profile.user = user
          profile.save()
          messages.info(request, 'You\'ve successfully updated your account!')
-         return redirect('home')
+         return redirect('edit_profile')
    else:
       form = ProfileUpdateForm(instance=request.user)
       user_form = UserUpdateForm(instance=request.user.profile)
